@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:56:39 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/20 21:37:54 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/20 23:18:30 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "get_next_line.h"
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
+# include "../libft/includes/libft.h"
 
 # define W		119 
 # define A		97

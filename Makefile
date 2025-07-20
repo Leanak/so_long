@@ -6,7 +6,7 @@
 #    By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 13:04:31 by lenakach          #+#    #+#              #
-#    Updated: 2025/07/20 21:38:03 by lenakach         ###   ########.fr        #
+#    Updated: 2025/07/20 23:16:48 by lenakach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,11 @@ FLAGS = -Wall -Wextra -Werror
 #Push_swap mandatory
 
 #Fichiers sources
-GNL_DIR = get_next_line
-GNL = $(GNL_DIR)/get_next_line.c $(GNL_DIR)/get_next_line_utils.c
+LIBFT_DIR = libft
+MINILIBX_DIR = minilibx-linux
+INCLUDES = -Iincludes -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
+
+LIBFT = $(LIBFT_DIR)/libft.a
 
 MOUV_DIR = mouvement
 MOUV = $(MOUV_DIR)/key_press.c
@@ -39,20 +42,25 @@ OBJS = $(SRCS:.c=.o)
 RM = rm -f
 
 #Regles
-all : $(NAME)
+all : $(LIBFT) $(NAME)
 
-$(NAME) : $(OBJS)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJS) -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(LIBFT) -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm -lz
 	
 %.o: %.c
-	$(CC) $(FLAGS) -I./includes -Iminilibx-linux -c $< -o $@
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 
-clean :
-	$(RM) $(OBJS) $(OBJS_BONUS)
+clean:
+	$(RM) $(OBJS) $(OBJS_BONUS) 
+	make clean -C $(LIBFT_DIR)
 
-fclean : clean
+fclean: clean
 	$(RM) $(NAME) $(NAME_BONUS)
+	make fclean -C $(LIBFT_DIR)
 
-re : fclean all
+re: fclean all
 
-.PHONY : all clean fclean re test
+.PHONY: all clean fclean re test
