@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 17:42:14 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/21 20:12:21 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:28:16 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_collect(t_window *game)
 	game->collect_anim->frame_count = 3;
 	game->collect_anim->timer = 0;
 }
+
 void	init_other(t_window *game)
 {
 	game->img_ennemy = mlx_xpm_file_to_image(game->mlx, "imgs/ennemy.xpm",
@@ -79,4 +80,3 @@ void	init_images(t_window *game)
 	if (!game->img_exit)
 		exit_game(game);
 }
-

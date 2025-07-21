@@ -6,7 +6,7 @@
 #    By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 13:04:31 by lenakach          #+#    #+#              #
-#    Updated: 2025/07/21 19:27:32 by lenakach         ###   ########.fr        #
+#    Updated: 2025/07/21 20:29:06 by lenakach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,6 @@ $(NAME_BONUS): $(OBJS_BONUS)
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS)
 	make clean -C $(LIBFT_DIR)
-	make clean -C $(MINILIBX_DIR)
 
 fclean: clean
 	$(RM) $(NAME) $(NAME_BONUS)
