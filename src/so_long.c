@@ -6,23 +6,17 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:45:13 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/20 23:28:45 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:42:24 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/so_long.h"
+#include "../includes/so_long.h"
 
-void	print_map(char **map)
+int	close_window(t_window *game)
 {
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		printf("%s", map[i]);
-		i++;
-	}
-	printf("\n");
+	free_struct(game);
+	exit(1);
+	return (0);
 }
 
 int	init_window(t_window *game)
@@ -39,17 +33,18 @@ int	init_window(t_window *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (0);
-	game->mlx_win = mlx_new_window(game->mlx, game->img_width, game->img_height, "So_long game");
+	game->mlx_win = mlx_new_window(game->mlx, game->img_width, game->img_height,
+			"So_long game");
 	if (!game->mlx_win)
 		return (0);
 	return (1);
 }
 
-t_window *init_game(t_window *game)
+t_window	*init_game(t_window *game)
 {
 	game = malloc(sizeof(t_window));
 	if (!game)
-		exit (1);
+		exit(1);
 	game->map = NULL;
 	game->x = 0;
 	game->y = 0;
@@ -62,26 +57,24 @@ t_window *init_game(t_window *game)
 
 int	main(int ac, char **av)
 {
-	t_window	*game = NULL;
+	t_window	*game;
 
+	game = NULL;
 	if (ac != 2)
 		return (1);
 	game = init_game(game);
 	game->map = read_map(av[1], game);
-	if (!game->map || !game)
+	if (!game->map || !game || !init_window(game))
 	{
 		if (game)
 			free_struct(game);
-		return (1);
-	}
-	if (!init_window(game))
-	{
-		free_struct(game);
+		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
 	init_images(game);
 	render_map(game);
 	mlx_key_hook(game->mlx_win, handle_key, game);
+	mlx_hook(game->mlx_win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
 	free_struct(game);
 	return (0);

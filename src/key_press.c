@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:00:00 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/20 21:55:19 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:59:31 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,14 @@
 void	exit_game(t_window *game)
 {
 	free_struct(game);
-	exit (1);
+	exit(1);
+}
+
+void	game_change(t_window *game, int new_x, int new_y)
+{
+	game->x = new_x;
+	game->y = new_y;
+	game->step++;
 }
 
 void	try_move(t_window *game, int x, int y)
@@ -27,7 +34,6 @@ void	try_move(t_window *game, int x, int y)
 	new_x = game->x + x;
 	new_y = game->y + y;
 	target = game->map[new_y][new_x];
-	
 	if (target == '1')
 		return ;
 	if (target == 'C')
@@ -36,28 +42,25 @@ void	try_move(t_window *game, int x, int y)
 	{
 		if (game->collect == game->collect_max)
 		{
-			printf("OK BRAVO\n");
+			ft_printf("OK BRAVO\n");
 			exit_game(game);
 		}
 		return ;
 	}
 	game->map[game->y][game->x] = '0';
 	game->map[new_y][new_x] = 'P';
-	game->x = new_x;
-	game->y = new_y;
-	game->step++;
-	printf("Moves : %d\n", game->step);
+	game_change(game, new_x, new_y);
+	ft_printf("Moves : %d\n", game->step);
 	render_map(game);
 }
 
 int	handle_key(int keycode, t_window *game)
 {
-	printf("%d\n", keycode);
 	if (keycode == ESC)
 		exit_game(game);
 	else if (keycode == UP || keycode == W)
 		try_move(game, 0, -1);
-	else if (keycode == DOWN ||  keycode == S)
+	else if (keycode == DOWN || keycode == S)
 		try_move(game, 0, 1);
 	else if (keycode == LEFT || keycode == A)
 		try_move(game, -1, 0);

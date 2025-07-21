@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   map_parsing_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:56:09 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/20 21:13:47 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:39:40 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static int	map_parsing(char **map, t_window *game)
 {
@@ -60,7 +60,6 @@ char	**read_map(char *filename, t_window *game)
 	if (!map)
 		return (close(fd), NULL);
 	create_map(map, fd);
-	print_map(map);
 	if (!map_parsing(map, game))
 		return (free_map(map), NULL);
 	return (map);

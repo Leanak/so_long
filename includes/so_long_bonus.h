@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:56:39 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/21 20:01:35 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:01:17 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../minilibx-linux/mlx.h"
 # include "libft.h"
@@ -31,6 +31,14 @@
 # define LEFT 65361
 # define RIGHT 65363
 
+typedef struct s_anim
+{
+	void	*frames[3];
+	int		current;
+	int		frame_count;
+	int		timer;
+}			t_anim;
+
 typedef struct s_window
 {
 	void	*mlx;
@@ -46,8 +54,8 @@ typedef struct s_window
 	void	*img_fence_right;
 	void	*img_floor;
 	void	*img_player;
-	void	*img_collectible;
 	void	*img_exit;
+	void	*img_ennemy;
 	int		x;
 	int		y;
 	char	**map;
@@ -55,6 +63,7 @@ typedef struct s_window
 	int		collect;
 	int		exit_max;
 	int		step;
+	t_anim	*collect_anim;
 }			t_window;
 
 # ifndef TILE_SIZE
@@ -68,7 +77,7 @@ int			is_rectangle(char **map);
 int			check_elements(char **map, t_window *game);
 int			check_playability(char **map, t_window *game);
 void		exit_game(t_window *game);
-int			close_window(t_window *game);
+void		write_moves(t_window *game);
 
 // Maps utils
 int			count_len(char *str);
@@ -87,5 +96,6 @@ void		init_images(t_window *game);
 
 // Mouvements
 int			handle_key(int keycode, t_window *game);
+int			update_and_render(t_window *game);
 
 #endif

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_playability.c                                :+:      :+:    :+:   */
+/*   check_playability_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:33:18 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/20 18:37:04 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:15:33 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 static void	flood_fill(char **dup, int x, int y)
 {
@@ -34,13 +34,13 @@ static void	flood_fill(char **dup, int x, int y)
 
 static void	find_player(char **dup, t_window *game)
 {
-	int		i;
-	int		j;
-	int		len;
-	int		lines;
+	int	i;
+	int	j;
+	int	len;
+	int	lines;
 
 	len = ft_strlen(dup[0]);
-	if (dup[0][len -1] == '\n')
+	if (dup[0][len - 1] == '\n')
 		len--;
 	lines = count_true_line(dup);
 	i = -1;
@@ -76,7 +76,8 @@ static int	check_dup(char **dup)
 		j = 0;
 		while (j < len)
 		{
-			if (dup[i][j] != 'V' && dup[i][j] != '1' && dup[i][j] != '0')
+			if (dup[i][j] != 'V' && dup[i][j] != '1' && dup[i][j] != '0'
+				&& dup[i][j] != 'X')
 				return (0);
 			j++;
 		}
@@ -89,7 +90,7 @@ int	check_playability(char **map, t_window *game)
 {
 	char	**dup;
 	int		result;
-	
+
 	dup = dup_map(map);
 	if (!dup)
 		return (0);

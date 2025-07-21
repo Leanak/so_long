@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 12:20:02 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/20 18:37:12 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:39:50 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_mur(char **map)
 	if (map[0][len - 1] == '\n')
 		len--;
 	while (i < len)
-	{	
+	{
 		if (map[0][i] != '1' || map[lines - 1][i] != '1')
 			return (0);
 		i++;

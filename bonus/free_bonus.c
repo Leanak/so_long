@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 13:50:28 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/20 22:08:44 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 20:15:20 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/so_long_bonus.h"
 
 void	free_map(char **map)
 {
@@ -28,8 +28,12 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	free_struct(t_window *game)
+void	destroy_other(t_window *game)
 {
+	if (game->collect_anim)
+		free(game->collect_anim);
+	if (game->img_ennemy)
+		mlx_destroy_image(game->mlx, game->img_ennemy);
 	if (game->img_wall_ext)
 		mlx_destroy_image(game->mlx, game->img_wall_ext);
 	if (game->img_wall)
@@ -41,13 +45,27 @@ void	free_struct(t_window *game)
 	if (game->img_fence_right)
 		mlx_destroy_image(game->mlx, game->img_fence_right);
 	if (game->img_fence_up)
-		mlx_destroy_image(game->mlx, game->img_fence_up);	
+		mlx_destroy_image(game->mlx, game->img_fence_up);
 	if (game->img_floor)
 		mlx_destroy_image(game->mlx, game->img_floor);
 	if (game->img_player)
 		mlx_destroy_image(game->mlx, game->img_player);
-	if (game->img_collectible)
-		mlx_destroy_image(game->mlx, game->img_collectible);
+}
+
+void	free_struct(t_window *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (game->collect_anim && game->collect_anim->frames[i])
+		{
+			mlx_destroy_image(game->mlx, game->collect_anim->frames[i]);
+		}
+		i++;
+	}
+	destroy_other(game);
 	if (game->img_exit)
 		mlx_destroy_image(game->mlx, game->img_exit);
 	free_map(game->map);
