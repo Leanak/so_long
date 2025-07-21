@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:33:18 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/21 20:15:33 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 21:40:45 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	flood_fill(char **dup, int x, int y)
 	lines = count_true_line(dup);
 	if (x < 0 || y < 0 || x >= len || y >= lines)
 		return ;
-	if (dup[y][x] == '1' || dup[y][x] == 'V')
+	if (dup[y][x] == '1' || dup[y][x] == 'V' || dup[y][x] == 'E' || dup[y][x] == 'X')
 		return ;
 	dup[y][x] = 'V';
 	flood_fill(dup, x - 1, y);
@@ -77,7 +77,7 @@ static int	check_dup(char **dup)
 		while (j < len)
 		{
 			if (dup[i][j] != 'V' && dup[i][j] != '1' && dup[i][j] != '0'
-				&& dup[i][j] != 'X')
+				&& dup[i][j] != 'X' && dup[i][j] != 'E')
 				return (0);
 			j++;
 		}
@@ -98,7 +98,7 @@ int	check_playability(char **map, t_window *game)
 	flood_fill(dup, game->x, game->y);
 	result = check_dup(dup);
 	if (result == 0)
-		return (free_struct(game), free_map(dup), 0);
+		return (free_map(dup), 0);
 	free_map(dup);
 	return (1);
 }

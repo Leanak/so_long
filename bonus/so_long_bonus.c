@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 15:50:00 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/21 20:03:10 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 21:50:03 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ t_window	*init_game(t_window *game)
 	game = malloc(sizeof(t_window));
 	if (!game)
 		exit(1);
+	ft_bzero(game, sizeof(t_window));
 	game->collect_anim = malloc(sizeof(t_anim));
 	if (!game->collect_anim)
 		free_struct(game);
+	ft_bzero(game->collect_anim, sizeof(t_anim));
 	game->map = NULL;
 	game->x = 0;
 	game->y = 0;

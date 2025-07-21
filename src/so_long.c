@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 10:45:13 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/21 19:42:24 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/07/21 21:09:35 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_window	*init_game(t_window *game)
 	game->collect = 0;
 	game->exit_max = 0;
 	game->step = 0;
+	ft_bzero(game, sizeof(t_window));
 	return (game);
 }
 
