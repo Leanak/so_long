@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:33:18 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/21 21:40:45 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/08/01 13:14:28 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	flood_fill(char **dup, int x, int y)
 	lines = count_true_line(dup);
 	if (x < 0 || y < 0 || x >= len || y >= lines)
 		return ;
-	if (dup[y][x] == '1' || dup[y][x] == 'V' || dup[y][x] == 'E' || dup[y][x] == 'X')
+	if (dup[y][x] == '1' || dup[y][x] == 'V' || dup[y][x] == 'E'
+		|| dup[y][x] == 'X')
 		return ;
 	dup[y][x] = 'V';
 	flood_fill(dup, x - 1, y);

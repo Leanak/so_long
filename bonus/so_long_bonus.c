@@ -6,7 +6,7 @@
 /*   By: lenakach <lenakach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 15:50:00 by lenakach          #+#    #+#             */
-/*   Updated: 2025/07/21 21:50:03 by lenakach         ###   ########.fr       */
+/*   Updated: 2025/08/01 13:54:45 by lenakach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@ int	close_window(t_window *game)
 	free_struct(game);
 	exit(1);
 	return (0);
+}
+
+int	check_ber(char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 3;
+	while (str[i])
+		i++;
+	i--;
+	if (str[i] == 'r' && str[i - 1] == 'e' && str[i - 2] == 'b'
+		&& str[i - 3] == '.')
+		return (0);
+	return (1);
 }
 
 int	init_window(t_window *game)
@@ -65,8 +81,12 @@ int	main(int ac, char **av)
 	t_window	*game;
 
 	game = NULL;
-	if (ac != 2)
+	if (ac != 2 || check_ber(av[1]) == 1)
+	{
+		if (check_ber(av[1]) == 1)
+			ft_putstr_fd("Map .ber error\n", 2);
 		return (1);
+	}
 	game = init_game(game);
 	game->map = read_map(av[1], game);
 	if (!game->map || !game || !init_window(game))
